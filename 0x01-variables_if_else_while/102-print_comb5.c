@@ -1,5 +1,4 @@
 #include <stdio.h>
-
 /**
  * main - main block
  * Description: Print all possible combinations of two two-digit numbers.
@@ -14,21 +13,20 @@
  * You are not allowed to use any variable of type `char`.
  * Return: 0
  */
-
 int main(void)
 {
-	int x, y;
+	int i, j;
 	int a, b, c, d;
 
-	for (x = 0; x < 100; x++)
+	for (i = 0; i < 100; i++)
 	{
-		a = x / 10; 
-		b = x % 10; 
+		a = i / 10; /* doubles fnum */
+		b = i % 10; /* singles fnum */
 
-		for (y = 0; y < 100; y++)
+		for (j = 0; j < 100; j++)
 		{
-			c = y / 10;
-			d = y % 10; 
+			c = j / 10; /* doubles snum */
+			d = j % 10; /* singles snum */
 
 			if (a < c || (a == c && b < d))
 			{
