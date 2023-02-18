@@ -1,19 +1,12 @@
 #include <stdio.h>
-/**
- * main - main block
- * Description: Print all numbers of base 10, starting from 0.
- * You are not allowed to use any variable of type char.
- * You can only use `putchar` to print to console.
- * You can only use `putchar` twice.
- * Return: 0
- */
+
 int main(void)
 {
-	int i;
+	int x;
 
-	for (i = 0; i < 10; i++)
+	for (x = 0; x < 10; x++)
 	{
-		putchar(i + '0');
+		putchar(x + '0');
 	}
 	putchar('\n');
 
