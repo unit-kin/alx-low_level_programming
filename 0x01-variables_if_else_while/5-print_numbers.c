@@ -1,16 +1,12 @@
 #include <stdio.h>
-/**
- * main - main block
- * Description: Print all numbers of base 10, starting from 0.
- * Return: 0
- */
+
 int main(void)
 {
-	int i;
+	int x;
 
-	for (i = 0; i < 10; i++)
+	for (x = 0; x < 10; x++)
 	{
-		printf("%i", i);
+		printf("%i", x);
 	}
 	putchar('\n');
 
