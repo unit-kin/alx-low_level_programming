@@ -1,5 +1,4 @@
 #include <stdio.h>
-
 /**
  * main - main block
  * Description: Print all possible combinations fo single-digit numbers.
@@ -9,18 +8,17 @@
  * You are not allowed to use any variable of type `char`.
  * Return: 0
  */
-
 int main(void)
 {
-	int x = 0;
+	int i = 0;
 
-	while (x < 10)
+	while (i < 10)
 	{
-		putchar(x + '0');
-		if (x < 9)
+		putchar(i + '0');
+		if (i < 9)
 		{
-			putchar(42);
-			putchar(30);
+			putchar(44);
+			putchar(32);
 		}
 		i++;
 	}
