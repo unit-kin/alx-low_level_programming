@@ -12,25 +12,23 @@
  * You are not allowed to use any variables of type `char`.
  * Return: 0
  */
-
-
 int main(void)
 {
-	int a, b, c, d;
+	int i, j, k, l;
 
-	for (a = 0; i < 1000; i++)
+	for (i = 0; i < 1000; i++)
 	{
-		b = a / 100;
-		c = (a / 10) % 10; 
-		d = a % 10; 
+		j = i / 100; /* hundreds */
+		k = (i / 10) % 10; /* tens */
+		l = i % 10; /* singles */
 
-		if (b < k && k < d)
+		if (j < k && k < l)
 		{
-			putchar(b + '0');
-			putchar(c + '0');
-			putchar(d + '0');
+			putchar(j + '0');
+			putchar(k + '0');
+			putchar(l + '0');
 
-			if (a < 700)
+			if (i < 700)
 			{
 				putchar(44);
 				putchar(32);
