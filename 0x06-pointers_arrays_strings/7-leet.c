@@ -6,29 +6,20 @@
  * Return: encoded string `s`
  */
 
-char *leet(char *s)
-{
-	int i;
+char *leet(char *s) {
+    int i, j;
+    char leet_letters[] = {'4', '3', '0', '7', '1'};
+    char normal_letters[] = {'a', 'e', 'o', 't', 'l'};
 
-	while (s[i] != '\0') {
-        if (s[i] == 'a' || s[i] == 'A') {
-            s[i] = '4';
-        }
-        else if (s[i] == 'e' || s[i] == 'E') {
-            s[i] = '3';
-        }
-        else if (s[i] == 'o' || s[i] == 'O') {
-            s[i] = '0';
-        }
-        else if (s[i] == 't' || s[i] == 'T') {
-            s[i] = '7';
-        }
-        else if (s[i] == 'l' || s[i] == 'L') {
-            s[i] = '1';
-        }
-        i++;
+    for (i = 0; s[i] != '\0'; i++) {
+        for (j = 0; j < 5; j++) {
+            if (s[i] == normal_letters[j] || s[i] == normal_letters[j] - 'a' + 'A') {
+		    s[i] = leet_letters[j];
+		    break;
+	    }
 	}
+    }
 
-
-	return (s);
+    return s;
 }
+
