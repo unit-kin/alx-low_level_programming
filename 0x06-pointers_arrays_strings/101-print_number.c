@@ -1,27 +1,24 @@
 #include "main.h"
-#include <stdio.h>
 /**
- * print_number - Print an integer using only _putchar
- * @n: integer to print
+ * print_number - Print the given int one digit at a time
+ * @n: The integer to print
  */
 
 void print_number(int n)
 {
-	int divisor = 1;
-	if (n < 0)
+	if (n == 0)
 	{
+		_putchar('0');
+		return;
+	}
+	else if (n > 0)
+		n *= -1;
+	else
 		_putchar('-');
-		n = -n;
-	}
-	while (n / divisor > 9)
+	if ((n / 10) != 0)
 	{
-		divisor *= 10;
+		print_number((n / 10) * -1);
 	}
-	while (divisor > 0)
-	{
-		_putchar('0' + n / divisor);
-		n %= divisor;
-		divisor /= 10;
-	}
+	_putchar((n % 10) * -1 + '0');
 }
 
