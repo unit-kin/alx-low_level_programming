@@ -1,61 +1,83 @@
-#include <stdio.h>
+#include "main.h"
+
+char *add_strings(char *n1, char *n2, char *r, int r_index);
+char *infinite_add(char *n1, char *n2, char *r, int size_r);
+
 /**
- * infinite_add - Add up two numbers stored in given char arrays
- * @n1: The first number
- * @n2: The second number
- * @r: Pointer to the buffer to store result
- * @size_r: The size of the buffer
+ * add_strings - Adds the numbers stored in two strings.
+ * @n1: The string containing the first number to be added.
+ * @n2: The string containing the second number to be added.
+ * @r: The buffer to store the result.
+ * @r_index: The current index of the buffer.
  *
- * Return: 0 if buffer too small to store result, else return pointer to buffer
+ * Return: If r can store the sum - a pointer to the result.
+ *         If r cannot store the sum - 0.
+ */
+
+char *add_strings(char *n1, char *n2, char *r, int r_index)
+{
+	int num, tens = 0;
+
+	for (; *n1 && *n2; n1--, n2--, r_index--)
+	{
+		num = (*n1 - '0') + (*n2 - '0');
+		num += tens;
+		*(r + r_index) = (num % 10) + '0';
+		tens = num / 10;
+	}
+
+	for (; *n1; n1--, r_index--)
+	{
+		num = (*n1 - '0') + tens;
+		*(r + r_index) = (num % 10) + '0';
+		tens = num / 10;
+	}
+
+	for (; *n2; n2--, r_index--)
+	{
+		num = (*n2 - '0') + tens;
+		*(r + r_index) = (num % 10) + '0';
+		tens = num / 10;
+	}
+
+	if (tens && r_index >= 0)
+	{
+		*(r + r_index) = (tens % 10) + '0';
+		return (r + r_index);
+	}
+
+	else if (tens && r_index < 0)
+		return (0);
+
+	return (r + r_index + 1);
+}
+/**
+ * infinite_add - Adds two numbers.
+ * @n1: The first number to be added.
+ * @n2: The second number to be added.
+ * @r: The buffer to store the result.
+ * @size_r: The buffer size.
+ *
+ * Return: If r can store the sum - a pointer to the result.
+ *         If r cannot store the sum - 0.
  */
 
 char *infinite_add(char *n1, char *n2, char *r, int size_r)
 {
-	int len1 = strlen(n1);
-	int len2 = strlen(n2);
-	int carry = 0;
-	int i, j;
+	int index, n1_len = 0, n2_len = 0;
 
-	// Check if result fits in buffer
-	if (len1 + len2 + 1 > size_r)
-	{
-		return 0;
-	}
+	for (index = 0; *(n1 + index); index++)
+		n1_len++;
 
-	// Add digits from right to left
-	for (i = len1 - 1, j = len2 - 1; i >= 0 || j >= 0 || carry; i--, j--)
-	{
-		int sum = carry;
-		if (i >= 0)
-		{
-			sum += n1[i] - '0';
-		}
-		if (j >= 0)
-		{
-			sum += n2[j] - '0';
-		}
-		if (sum >= 10)
-		{
-			carry = 1;
-			sum -= 10;
-		} else
-		{
-			carry = 0;
-		}
-		r[len1 + len2 - i - j - 2] = sum + '0';
-	}
+	for (index = 0; *(n2 + index); index++)
+		n2_len++;
 
-	// Null-terminate result string
-	r[len1 + len2 - i - j - 1] = '\0';
+	if (size_r <= n1_len + 1 || size_r <= n2_len + 1)
+		return (0);
 
-	// Reverse result string in place
-	for (i = 0, j = strlen(r) - 1; i < j; i++, j--)
-	{
-		char tmp = r[i];
-		r[i] = r[j];
-		r[j] = tmp;
-	}
+	n1 += n1_len - 1;
+	n2 += n2_len - 1;
+	*(r + size_r) = '\0';
 
-	return (r);
+	return (add_strings(n1, n2, r, --size_r));
 }
-
