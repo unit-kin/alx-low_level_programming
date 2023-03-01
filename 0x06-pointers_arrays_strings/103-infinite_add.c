@@ -1,4 +1,3 @@
-#include "main.h"
 #include <stdio.h>
 /**
  * infinite_add - Add up two numbers stored in given char arrays
@@ -9,60 +8,54 @@
  *
  * Return: 0 if buffer too small to store result, else return pointer to buffer
  */
+
 char *infinite_add(char *n1, char *n2, char *r, int size_r)
 {
-	int l1, l2, tmpl, rl, i, sum, num1, num2, carry;
-	char tmp[10000];
+	int len1 = strlen(n1);
+	int len2 = strlen(n2);
+	int carry = 0;
+	int i, j;
 
-	rl = i = l1 = l2 = sum = num1 = num2 = carry = 0;
-	while (n1[l1] != '\0')
-		l1++;
-	while (n2[l2] != '\0')
-		l2++;
-	if (l1 + 2 > size_r || l2 + 2 > size_r)
-		return (0);
-	l1--;
-	l2--;
-	while (i <= l1 || i <= l2)
+	// Check if result fits in buffer
+	if (len1 + len2 + 1 > size_r)
 	{
-		num1 = num2 = 0;
-		if (i <= l1)
-			num1 = n1[l1 - i] - '0';
-		if (i <= l2 && (l2 - i) >= 0)
-			num2 = n2[l2 - i] - '0';
-		sum = num1 + num2 + carry;
+		return 0;
+	}
+
+	// Add digits from right to left
+	for (i = len1 - 1, j = len2 - 1; i >= 0 || j >= 0 || carry; i--, j--)
+	{
+		int sum = carry;
+		if (i >= 0)
+		{
+			sum += n1[i] - '0';
+		}
+		if (j >= 0)
+		{
+			sum += n2[j] - '0';
+		}
 		if (sum >= 10)
 		{
 			carry = 1;
 			sum -= 10;
-		}
-		else
-			carry = 0;
-		r[i] = sum + '0';
-		i++;
-		rl++;
-	}
-	if (carry > 0)
-	{
-		r[i] = carry + '0';
-		r[i + 1] = '\0';
-	}
-	i = tmpl = 0;
-	while (i <= rl)
-	{
-		tmp[i] = r[rl - i];
-		tmpl++;
-		i++;
-	}
-	i = 0;
-	while (i < tmpl)
-	{
-		if (r[i] == '\0')
+		} else
 		{
-			break;
+			carry = 0;
 		}
-		r[i] = tmp[i];
-		i++;
+		r[len1 + len2 - i - j - 2] = sum + '0';
 	}
+
+	// Null-terminate result string
+	r[len1 + len2 - i - j - 1] = '\0';
+
+	// Reverse result string in place
+	for (i = 0, j = strlen(r) - 1; i < j; i++, j--)
+	{
+		char tmp = r[i];
+		r[i] = r[j];
+		r[j] = tmp;
+	}
+
 	return (r);
 }
+
