@@ -2,11 +2,12 @@
 #include <stdlib.h>
 
 /**
- * _calloc - Allocates memory for an array using malloc
- * @nmemb: Number of elements to allocate memory for
- * @size: Size in bytes of each element
+ * _calloc - allocates memory for an array using malloc
+ * @nmemb: number of elements in the array
+ * @size: size of each element
  *
- * Return: Pointer to allocated memory or NULL on failure
+ * Return: pointer to the allocated memory, or NULL if nmemb or size is 0, or if
+ * malloc fails
  */
 void *_calloc(unsigned int nmemb, unsigned int size)
 {
@@ -20,8 +21,8 @@ void *_calloc(unsigned int nmemb, unsigned int size)
 	if (ptr == NULL)
 		return (NULL);
 
+	/* Set all bytes to 0 */
 	_memset(ptr, 0, nmemb * size);
 
 	return (ptr);
 }
-
