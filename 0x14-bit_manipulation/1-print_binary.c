@@ -1,4 +1,4 @@
-#include "holberton.h"
+#include "main.h"
 #include <stdio.h>
 
 /**
@@ -7,8 +7,8 @@
  */
 void print_binary(unsigned long int n)
 {
-	unsigned long int temp;
-	int shifts;
+	unsigned long int temp = n;
+	int shifts = 0;
 
 	if (n == 0)
 	{
@@ -16,14 +16,16 @@ void print_binary(unsigned long int n)
 		return;
 	}
 
-	for (temp = n, shifts = 0; (temp >>= 1) > 0; shifts++)
-		;
+	while ((temp >>= 1) > 0)
+		shifts++;
 
-	for (; shifts >= 0; shifts--)
+	while (shifts >= 0)
 	{
 		if ((n >> shifts) & 1)
 			printf("1");
 		else
 			printf("0");
+
+		shifts--;
 	}
 }
