@@ -10,23 +10,23 @@
  */
 int clear_bit(unsigned long int *n, unsigned int index)
 {
-        unsigned long int i;
-        unsigned int hold;
+	unsigned long int i;
+	unsigned int hold;
 
-        if (index > 63) /* index must be less than 64 */
-                return (-1);
+	if (index > 63) /* index must be less than 64 */
+		return (-1);
 
-        hold = index;
-        while (hold > 0)
-        {
-                i = 1UL << hold;
-                *n &= ~i;
-                hold--;
-        }
+	hold = index;
+	while (hold > 0)
+	{
+		i = 1UL << hold;
+		*n &= ~i;
+		hold--;
+	}
 
-        i = 1UL << index;
-        if ((*n & i) != 0) /* check if bit at index is set */
-                *n ^= i; /* unset bit at index */
+	i = 1UL << index;
+	if ((*n & i) != 0) /* check if bit at index is set */
+		*n ^= i; /* unset bit at index */
 
-        return (1);
+	return (1);
 }
