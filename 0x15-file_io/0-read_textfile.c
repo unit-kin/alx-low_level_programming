@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * read_textfile - This basically reads a txt file and prints it to the POSIX standard output
+ * read_textfile - reads a txt file and prints it to the POSIX STDOUT
  * @filename: This is the name of the file to read
  * @letters:This is the number of letters to read and print
  *
- * Return: the actual number of letters read and printed, or 0 in the case of a failure
+ * Return: Actual NO of letters read and printed, or 0 in the case of a failure
  */
 ssize_t read_textfile(const char *filename, size_t letters)
 {
